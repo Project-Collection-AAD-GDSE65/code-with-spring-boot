@@ -1,25 +1,25 @@
-server:
-  port: 9090
-  servlet:
-    context-path: /shop
-spring:
-  application:
-    name: HelloSpringBoot
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      maximum-pool-size: 5
-    password: mysql
-    url: jdbc:mysql://localhost:3306/customerData20240323?createDatabaseIfNotExist=true
-    username: root
-  jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
+#server:
+#  port: 9090
+#  servlet:
+#    context-path: /shop
+#spring:
+#  application:
+#    name: HelloSpringBoot
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    hikari:
+#      maximum-pool-size: 5
+#    password: mysql
+#    url: jdbc:mysql://localhost:3306/customerData20240323?createDatabaseIfNotExist=true
+#    username: root
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    generate-ddl: true
+#    hibernate:
+#      ddl-auto: update
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    properties:
+#      hibernate:
+#        format_sql: true
+#    show-sql: true
