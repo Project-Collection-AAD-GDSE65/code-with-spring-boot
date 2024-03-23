@@ -1,15 +1,28 @@
 package lk.ijse.gdse.aad65.HelloSpringBoot.contoller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.ijse.gdse.aad65.HelloSpringBoot.dto.CustomerDTO;
+import lk.ijse.gdse.aad65.HelloSpringBoot.service.CustomerService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/customer")
+@RequiredArgsConstructor
 public class Customer {
+    private final CustomerService customerService;
+
     @GetMapping("/health")
     public String healthTest(){
         return "CustomerHealth Test";
+    }
+    @PostMapping
+    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customer) {
+        return customerService.saveCustomer(customer);
+    }
+    @GetMapping
+    public List<CustomerDTO> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 }
