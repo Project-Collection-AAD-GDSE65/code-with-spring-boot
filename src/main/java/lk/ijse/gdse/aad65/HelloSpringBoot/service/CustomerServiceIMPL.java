@@ -3,19 +3,24 @@ package lk.ijse.gdse.aad65.HelloSpringBoot.service;
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.aad65.HelloSpringBoot.dao.CustomerRepo;
 import lk.ijse.gdse.aad65.HelloSpringBoot.dto.CustomerDTO;
+import lk.ijse.gdse.aad65.HelloSpringBoot.util.Mapping;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class CustomerServiceIMPL implements CustomerService {
     private final CustomerRepo repo;
+    private final Mapping mapping;
     @Override
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-        return null;
+        customerDTO.setCustomerId(UUID.randomUUID().toString());
+        return mapping.toCustomerDTO(repo.save(mapping.toCustomer(customerDTO)));
     }
 
     @Override
@@ -30,7 +35,7 @@ public class CustomerServiceIMPL implements CustomerService {
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        return List.of();
+        return mapping.toCustomerDTOList(repo.findAll());
     }
 
     @Override
