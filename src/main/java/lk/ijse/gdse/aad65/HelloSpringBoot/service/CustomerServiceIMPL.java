@@ -1,12 +1,18 @@
 package lk.ijse.gdse.aad65.HelloSpringBoot.service;
 
+import jakarta.transaction.Transactional;
+import lk.ijse.gdse.aad65.HelloSpringBoot.dao.CustomerRepo;
 import lk.ijse.gdse.aad65.HelloSpringBoot.dto.CustomerDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class CustomerServiceIMPL implements CustomerService {
+    private final CustomerRepo repo;
     @Override
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
         return null;

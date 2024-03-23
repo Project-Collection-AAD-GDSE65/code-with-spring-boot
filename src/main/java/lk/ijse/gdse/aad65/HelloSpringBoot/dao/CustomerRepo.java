@@ -1,4 +1,7 @@
 package lk.ijse.gdse.aad65.HelloSpringBoot.dao;
 
-public interface CustomerRepo {
+import lk.ijse.gdse.aad65.HelloSpringBoot.entity.CustomerEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerRepo extends JpaRepository<CustomerEntity,String> {
 }
