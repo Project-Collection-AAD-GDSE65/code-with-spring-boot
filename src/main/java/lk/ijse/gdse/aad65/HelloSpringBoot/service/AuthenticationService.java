@@ -1,4 +1,4 @@
-package lk.ijse.gdse.aad65.HelloSpringBoot.reqAndresp.authObj;
+package lk.ijse.gdse.aad65.HelloSpringBoot.service;
 
 import lk.ijse.gdse.aad65.HelloSpringBoot.reqAndresp.response.JwtAuthResponse;
 import lk.ijse.gdse.aad65.HelloSpringBoot.reqAndresp.secure.SignIn;

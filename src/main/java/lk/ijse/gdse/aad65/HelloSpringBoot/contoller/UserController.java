@@ -1,6 +1,6 @@
 package lk.ijse.gdse.aad65.HelloSpringBoot.contoller;
 
-import lk.ijse.gdse.aad65.HelloSpringBoot.reqAndresp.authObj.AuthenticationService;
+import lk.ijse.gdse.aad65.HelloSpringBoot.service.AuthenticationService;
 import lk.ijse.gdse.aad65.HelloSpringBoot.reqAndresp.response.JwtAuthResponse;
 import lk.ijse.gdse.aad65.HelloSpringBoot.reqAndresp.secure.SignIn;
 import lk.ijse.gdse.aad65.HelloSpringBoot.reqAndresp.secure.SignUp;
