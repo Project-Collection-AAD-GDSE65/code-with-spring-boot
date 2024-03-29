@@ -47,13 +47,22 @@ public class JWTServiceIMPL implements JWTService {
         extractClaims.put("role",userDetails.getAuthorities());
         Date now = new Date();
         Date expire = new Date(now.getTime() + 1000 * 600);
+        Date refreshExpire = new Date(now.getTime() + 1000 * 600 * 600);
+
 
         String accessToken = Jwts.builder().setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(now)
                 .setExpiration(expire)
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
-        return accessToken;
+
+
+        String refreshToken = Jwts.builder().setClaims(extractClaims)
+                .setSubject(userDetails.getUsername())
+                .setExpiration(refreshExpire)
+                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
+
+        return accessToken + " : "+ refreshToken;
 
     }
     private boolean isTokenExpired(String token) {
