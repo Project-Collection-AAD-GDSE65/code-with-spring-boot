@@ -12,9 +12,12 @@ import lk.ijse.gdse.aad65.HelloSpringBoot.service.JWTService;
 import lk.ijse.gdse.aad65.HelloSpringBoot.util.Mapping;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,11 +30,14 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-
-
     @Override
     public JwtAuthResponse signIn(SignIn signIn) {
-        return null;
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(signIn.getEmail(),signIn.getPassword()));
+        var userByEmail = userRepo.findByEmail(signIn.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+       var generatedToken = jwtService.generateToken(userByEmail);
+       return JwtAuthResponse.builder().token(generatedToken).build() ;
     }
 
     @Override
