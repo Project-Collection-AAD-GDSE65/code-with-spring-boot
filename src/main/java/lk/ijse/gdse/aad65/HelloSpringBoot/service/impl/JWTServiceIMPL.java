@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -22,22 +23,24 @@ public class JWTServiceIMPL implements JWTService {
 
     @Override
     public String extractUsername(String token) {
-        return "";
+        return extractClaim(token,Claims::getSubject);
     }
 
     @Override
     public String generateToken(UserDetails userDetails) {
-        return "";
+        return generateToken(new HashMap<>(),userDetails);
     }
 
     @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        return false;
+        var username = extractUsername(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+
     }
     // actual process
     private <T> T extractClaim(String token, Function<Claims,T> claimResolve) {
-        //ToDo:
-        return claimResolve.apply("");
+         final Claims claims = getAllClaims(token);
+         return claimResolve.apply(claims);
     }
 
     private String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
@@ -53,6 +56,17 @@ public class JWTServiceIMPL implements JWTService {
         return accessToken;
 
     }
+    private boolean isTokenExpired(String token) {
+        return extractExpiration(token).before(new Date());
+    }
+    private Date extractExpiration(String token) {
+        return extractClaim(token,Claims::getExpiration);
+    }
+    private Claims getAllClaims(String token) {
+        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJwt(token)
+                .getBody();
+    }
+
     private Key getSignKey(){
         byte[] decode = Decoders.BASE64.decode(jwtKey);
         return Keys.hmacShaKeyFor(decode);
