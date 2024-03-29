@@ -3,6 +3,7 @@ package lk.ijse.gdse.aad65.HelloSpringBoot.contoller;
 import lk.ijse.gdse.aad65.HelloSpringBoot.dto.CustomerDTO;
 import lk.ijse.gdse.aad65.HelloSpringBoot.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,9 @@ public class Customer {
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customer) {
         return customerService.saveCustomer(customer);
     }
+
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<CustomerDTO> getAllCustomers() {
         return customerService.getAllCustomers();
     }
