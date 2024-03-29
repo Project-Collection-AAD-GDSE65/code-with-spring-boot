@@ -63,10 +63,9 @@ public class JWTServiceIMPL implements JWTService {
         return extractClaim(token,Claims::getExpiration);
     }
     private Claims getAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJwt(token)
+        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token)
                 .getBody();
     }
-
     private Key getSignKey(){
         byte[] decode = Decoders.BASE64.decode(jwtKey);
         return Keys.hmacShaKeyFor(decode);

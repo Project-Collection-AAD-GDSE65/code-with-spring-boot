@@ -51,7 +51,7 @@ public class AuthenticationServiceIMPL implements AuthenticationService {
                 .role(Role.valueOf(signUp.getRole()))
                 .build();
         var savedUser = userRepo.save(mapping.toUserEntity(buildUser));
-        jwtService.generateToken(savedUser);
-        return JwtAuthResponse.builder().build();
+        var genToken = jwtService.generateToken(savedUser);
+        return JwtAuthResponse.builder().token(genToken).build();
     }
 }
