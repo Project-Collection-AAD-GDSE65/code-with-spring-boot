@@ -1,11 +1,11 @@
-package lk.ijse.gdse.aad65.HelloSpringBoot.service;
+package lk.ijse.gdse.aad65.HelloSpringBoot.service.impl;
 
 import jakarta.transaction.Transactional;
 import lk.ijse.gdse.aad65.HelloSpringBoot.dao.CustomerRepo;
 import lk.ijse.gdse.aad65.HelloSpringBoot.dto.CustomerDTO;
+import lk.ijse.gdse.aad65.HelloSpringBoot.service.CustomerService;
 import lk.ijse.gdse.aad65.HelloSpringBoot.util.Mapping;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

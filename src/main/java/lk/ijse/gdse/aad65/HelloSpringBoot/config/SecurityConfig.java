@@ -25,7 +25,7 @@ public class SecurityConfig {
                        .anyRequest()
                        .authenticated())
                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-               .authenticationProvider() //Todo:authenticationProvider
+               .authenticationProvider(authenticationProvider()) //Todo:authenticationProvider
 
                return http.build();
    }
